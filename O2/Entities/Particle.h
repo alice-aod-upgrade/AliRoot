@@ -2,6 +2,7 @@
 #define ALI_O2_ENITIES_PARTICLE_H
 #include "../Components/Particle.h"
 #include "../ecs/Entity.h"
+#include <cmath>
 
 namespace ecs {
 template <typename... Components>

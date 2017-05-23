@@ -2,6 +2,7 @@
 #define ALI_O2_ENITIES_TRACK_H
 #include "../Components/Track.h"
 #include "../ecs/Entity.h"
+#include <cmath>
 
 namespace ecs {
 template <typename... Components> class Track : public Entity<Components...> {

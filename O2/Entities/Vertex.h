@@ -2,6 +2,7 @@
 #define ALI_O2_ENITIES_VERTEX_H
 #include "../Components/Vertex.h"
 #include "../ecs/Entity.h"
+#include <cmath>
 
 namespace ecs {
 template <typename... Components> class Vertex : public Entity<Components...> {
