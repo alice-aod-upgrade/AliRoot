@@ -2,7 +2,7 @@
 #define ECS_VARIABLE_COMPONENT_H
 
 namespace ecs {
-/// A flag for signaling that a component has an N->M mapping instead of N->N
+/// A flag for signaling that a component has an N->M mapping instead of N->N.
 class IVariableComponent {};
 }
 

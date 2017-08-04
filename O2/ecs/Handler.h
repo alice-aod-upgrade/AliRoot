@@ -1,6 +1,6 @@
 #ifndef ECS_HANDLER_H
 #define ECS_HANDLER_H
-#include "Slice.h"
+#include "../expression_templates/Slice.hpp"
 #include "VariableComponent.h"
 #include <boost/iostreams/device/mapped_file.hpp>
 #include <cstdint>
@@ -177,11 +177,11 @@ public:
   template <typename Entity, typename Component,
             typename std::enable_if<!std::is_base_of<
                 IVariableComponent, Component>::value>::type * = nullptr>
-  const Slice<Component> getTypedComponentData() const {
+  const Slice<typename Component::Type> getTypedComponentData() const {
     // std::cout << "someone requested " << typeid(Entity).name() << "/"
     //           << typeid(Component).name() << std::endl;
     auto untyped = getUntypedComponentData<Entity, Component>();
-    return Slice<Component>((Component *)untyped.data(),
+    return Slice<typename Component::Type>((typename Component::Type *)untyped.data(),
                             untyped.size() / sizeof(Component));
   }
 
@@ -212,12 +212,12 @@ public:
     size_t allocationSize = sizeof(uint64_t) * 2 * entityData.mCount +
                             dataCount * sizeof(Component);
     // BUG: leaks memory.
-    ComponentData cData((char *)malloc(allocationSize), allocationSize);
-    memcpy(cData.data(), map, sizeof(uint64_t) * 2 * entityData.mCount);
+    char* data_ptr = new char[allocationSize];
+    memcpy(data_ptr, map, sizeof(uint64_t) * 2 * entityData.mCount);
     Component *dataDest =
-        (Component *)(((uint64_t *)cData.data()) + 2 * entityData.mCount);
+        (Component *)(((uint64_t *)data_ptr) + 2 * entityData.mCount);
     memcpy(dataDest, data, dataCount * sizeof(Component));
-    entityData.mMapping[Component::Id()] = cData;
+    entityData.mMapping[Component::Id()] = ComponentData(data_ptr, allocationSize);
   }
 
   template <typename Entity> uint64_t getCount() const {

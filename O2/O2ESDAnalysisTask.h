@@ -6,6 +6,7 @@
 #include "Entities/Vertex.h"
 #include "O2AnalysisTask.h"
 #include "ecs/EntityCollection.h"
+#include <vector>
 
 template <typename Vertex, typename Track, typename Particle = ecs::Particle<>>
 class O2ESDAnalysisTask : public O2AnalysisTask {

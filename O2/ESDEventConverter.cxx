@@ -25,7 +25,7 @@ void ESDEventConverter::addESDEvent(double timestampNs,
                      rng.Gaus(timestampNs, 100 / sqrt(numberOfTracks)));
   Double_t cov[6];
   vertex->GetCovarianceMatrix(cov);
-  mVertexCovariance.push_back(cov);
+  mVertexCovariance.push_back(vertex::Cov_t(cov));
   mVertexSignalToNoiseX.push_back(vertex->GetXSNR());
   mVertexSignalToNoiseY.push_back(vertex->GetYSNR());
   mVertexSignalToNoiseZ.push_back(vertex->GetZSNR());
@@ -43,8 +43,7 @@ void ESDEventConverter::addESDEvent(double timestampNs,
   mVertexUsedTracksIndicesMapping.push_back(nIndices);
   mVertexUsedTracksIndicesOffset += nIndices;
 
-  mVertexESDEventMapping.push_back(
-      ecs::vertex::ESDEventMapping(mTrackX.size(), numberOfTracks));
+  mVertexESDEventMapping.push_back(vertex::ESDEventMapping_t(mTrackX.size(), numberOfTracks));
 
   for (int i = 0; i < numberOfTracks; i++) {
     AliESDtrack *esdTrack = event->GetTrack(i);
@@ -55,7 +54,7 @@ void ESDEventConverter::addESDEvent(double timestampNs,
     mTrackT.push_back(timestampNs + rng.Gaus(timestampNs, 100));
     Double_t cov[15];
     esdTrack->GetExternalCovariance(cov);
-    mTrackCovariance.push_back(cov);
+    mTrackCovariance.push_back(track::Cov_t(cov));
     mTrackPx.push_back(esdTrack->Px());
     mTrackPy.push_back(esdTrack->Py());
     mTrackPz.push_back(esdTrack->Pz());

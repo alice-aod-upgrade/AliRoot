@@ -110,6 +110,7 @@ if(ALIROOT_STATIC)
 endif(ALIROOT_STATIC)
 
 # ECS things
+install(DIRECTORY expression_templates DESTINATION include)
 install(DIRECTORY ecs DESTINATION include)
 install(DIRECTORY Entities DESTINATION include)
 install(DIRECTORY Components DESTINATION include)

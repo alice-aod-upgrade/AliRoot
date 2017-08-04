@@ -2,7 +2,7 @@
 #define ECS_ENTITY_H
 #include "Dependency.h"
 #include "EntityCollection.h"
-#include "Slice.h"
+#include "../expression_templates/Slice.hpp"
 #include "VariableComponent.h"
 #include "extended_type_traits.h"
 #include <tuple>
@@ -80,7 +80,7 @@ public:
             typename std::enable_if<
                 !std::is_base_of<IVariableComponent, G>::value &&
                 tuple_contains<G, ComponentsTuple>::value>::type * = nullptr>
-  constexpr G get() const {
+  constexpr typename G::Type get() const {
     return mCollection->template get<G>()[mId];
   }
 
@@ -90,11 +90,11 @@ public:
             typename std::enable_if<
                 std::is_base_of<IVariableComponent, G>::value &&
                 tuple_contains<G, ComponentsTuple>::value>::type * = nullptr>
-  Slice<G> get() const {
-    std::pair<uint64_t *, G *> data = mCollection->template get<G>();
+  Slice<typename G::Type> get() const {
+    auto data = mCollection->template get<G>();
     uint64_t index = data.first[2 * mId + 0];
     uint64_t size = data.first[2 * mId + 1];
-    return Slice<G>((G *)(data.second + index), size);
+    return Slice<typename G::Type>((typename G::Type*)(data.second + index), size);
   }
 };
 }

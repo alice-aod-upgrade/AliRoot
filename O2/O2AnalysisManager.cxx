@@ -15,7 +15,7 @@ void O2AnalysisManager::startAnalysis() {
     // too.
     // #pragma omp for schedule(dynamic) collapse(2)
     for (auto &handler : mHandlers) {
-#pragma omp parallel for schedule(dynamic)
+// #pragma omp parallel for schedule(dynamic)
       for (int i = 0; i < mTasks.size(); i++) {
         auto &task = mTasks[i];
         task->setHandler(handler);
