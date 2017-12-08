@@ -1,6 +1,6 @@
 #ifndef ECS_HANDLER_H
 #define ECS_HANDLER_H
-#include "../expression_templates/Slice.hpp"
+#include <compute_arrays.hpp>
 #include "VariableComponent.h"
 #include <boost/iostreams/device/mapped_file.hpp>
 #include <cstdint>
@@ -26,8 +26,8 @@ class Handler {
       return std::strcmp(a, b) < 0;
     }
   };
-  // What we store for each component, a Slice char is just a size+ptr pair.
-  using ComponentData = Slice<char>;
+  // What we store for each component, a compute_arrays::Slice char is just a size+ptr pair.
+  using ComponentData = compute_arrays::Slice<char>;
   // what we store for each entity
   struct EntityData {
     EntityData(uint64_t count = 0) : mCount(count) {}
@@ -177,11 +177,11 @@ public:
   template <typename Entity, typename Component,
             typename std::enable_if<!std::is_base_of<
                 IVariableComponent, Component>::value>::type * = nullptr>
-  const Slice<typename Component::Type> getTypedComponentData() const {
+  const compute_arrays::Slice<typename Component::Type> getTypedComponentData() const {
     // std::cout << "someone requested " << typeid(Entity).name() << "/"
     //           << typeid(Component).name() << std::endl;
     auto untyped = getUntypedComponentData<Entity, Component>();
-    return Slice<typename Component::Type>((typename Component::Type *)untyped.data(),
+    return compute_arrays::Slice<typename Component::Type>((typename Component::Type *)untyped.data(),
                             untyped.size() / sizeof(Component));
   }
 
