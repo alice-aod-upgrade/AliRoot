@@ -21,6 +21,8 @@ void ESDEventConverter::addESDEvent(double timestampNs,
   mVertexX.push_back(vertex->GetX());
   mVertexY.push_back(vertex->GetY());
   mVertexZ.push_back(vertex->GetZ());
+  //simulated innacuracy in the timestepping method: a guassian around the
+  // "real" time with sigma = 100/sqrt(number of tracks).
   mVertexT.push_back(timestampNs +
                      rng.Gaus(timestampNs, 100 / sqrt(numberOfTracks)));
   Double_t cov[6];
@@ -32,18 +34,22 @@ void ESDEventConverter::addESDEvent(double timestampNs,
   mVertexChiSquared.push_back(vertex->GetChi2());
   mVertexSigma.push_back(vertex->GetDispersion());
   int nIndices = vertex->GetNIndices();
-  // TODO: verify
+
   // How many tracks were already added before this event.
   size_t trackIndexOffset = mTrackX.size();
+  //get and push the (offset) track indices of this vertex
   UShort_t *indices = vertex->GetIndices();
   for (int i = 0; i < nIndices; i++) {
     mVertexUsedTracksIndices.push_back(indices[i] + trackIndexOffset);
   }
+  //This is an N->M mapping so push the [offset,size] pair to the mapping.
   mVertexUsedTracksIndicesMapping.push_back(mVertexUsedTracksIndicesOffset);
   mVertexUsedTracksIndicesMapping.push_back(nIndices);
+  //and increase the offset.
   mVertexUsedTracksIndicesOffset += nIndices;
 
-  mVertexESDEventMapping.push_back(vertex::ESDEventMapping_t(mTrackX.size(), numberOfTracks));
+  //push the mapping of (primary-)vertex -> tracks. [offset,size] pair.
+  mVertexESDEventMapping.push_back(vertex::ESDEventMapping_t(mTrackX.size(), numberOfTracks))
 
   for (int i = 0; i < numberOfTracks; i++) {
     AliESDtrack *esdTrack = event->GetTrack(i);
@@ -160,6 +166,6 @@ void ESDEventConverter::toFile(const std::string &filename) {
   }
   // h.forceInsertComponentData<Track_t, TrackToClusterMapping>(
   //     mapTable.data(), map.size(), map.data());
-  // and we tell h to serialize this data to the the file "buffer.bin"
+  // and we tell h to serialize this data to the the file "filename"
   h.toFile(filename);
 }
