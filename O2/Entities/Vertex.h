@@ -1,5 +1,6 @@
 #ifndef ALI_O2_ENITIES_VERTEX_H
 #define ALI_O2_ENITIES_VERTEX_H
+#include "functions/math.h"
 #include "../Components/Vertex.h"
 #include "../ecs/Entity.h"
 #include <cmath>
@@ -12,11 +13,11 @@ public:
   template <typename U = Vertex<Components...>,
             typename std::enable_if<U::template Contains<
                 vertex::X, vertex::Y, vertex::Z>()>::type * = nullptr>
-  float length_xyz() const {
+  auto length_xyz() const {
     auto x = this->template get<vertex::X>();
     auto y = this->template get<vertex::Y>();
     auto z = this->template get<vertex::Z>();
-    return sqrtf(x * x + y * y + z * z);
+    return o2::sqrt(x * x + y * y + z * z);
   }
 };
 }

@@ -1,5 +1,6 @@
 #ifndef ALI_O2_ENITIES_TRACK_H
 #define ALI_O2_ENITIES_TRACK_H
+#include "functions/math.h"
 #include "../Components/Track.h"
 #include "../ecs/Entity.h"
 #include "../ecs/EntityCollection.h"
@@ -16,13 +17,13 @@ struct TrackFunctions : public Getter{
     auto x = this->template get<track::X>();
     auto y = this->template get<track::Y>();
     auto z = this->template get<track::Z>();
-    return sqrt(x * x + y * y + z * z);
+    return o2::sqrt(x * x + y * y + z * z);
   }
   template <typename U = Getter, typename std::enable_if<U::template Contains<track::Px, track::Py>()>::type * = nullptr>
   auto pt() const {
     auto px = this->template get<track::Px>();
     auto py = this->template get<track::Py>();
-    return sqrt(px * px + py * py);
+    return o2::sqrt(px * px + py * py);
   }
   template <typename U = Getter, typename std::enable_if<U::template Contains<
                 track::mc::MonteCarloIndex>()>::type * = nullptr>

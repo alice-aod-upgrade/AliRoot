@@ -1,5 +1,6 @@
 #ifndef ALI_O2_ENITIES_PARTICLE_H
 #define ALI_O2_ENITIES_PARTICLE_H
+#include "functions/math.h"
 #include "../Components/Particle.h"
 #include "../ecs/EntityCollection.h"
 #include "../ecs/Entity.h"
@@ -16,13 +17,13 @@ namespace ecs {
       auto x = this->template get<particle::X>();
       auto y = this->template get<particle::Y>();
       auto z = this->template get<particle::Z>();
-      return sqrt(x * x + y * y + z * z);
+      return o2::sqrt(x * x + y * y + z * z);
     }
     template <typename U = Getter, typename std::enable_if<U::template Contains<particle::Px, particle::Py>()>::type * = nullptr>
     auto pt() const {
       auto px = this->template get<particle::Px>();
       auto py = this->template get<particle::Py>();
-      return sqrt(px * px + py * py);
+      return o2::sqrt(px * px + py * py);
     }
   };
 

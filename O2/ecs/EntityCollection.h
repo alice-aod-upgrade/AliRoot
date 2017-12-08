@@ -1,7 +1,7 @@
 #ifndef ECS_ENTITY_COLLECTION_H
 #define ECS_ENTITY_COLLECTION_H
 #include "Handler.h"
-#include "../expression_templates/Slice.hpp"
+#include <compute_arrays.hpp>
 #include "VariableComponent.h"
 #include "extended_type_traits.h"
 #include <exception>
@@ -75,9 +75,9 @@ public:
       typename C, int index = Entity::template IndexOf<C>(),
       typename std::enable_if<!std::is_base_of<IVariableComponent, C>::value &&
                               (index >= 0)>::type * = nullptr>
-  constexpr Slice<typename C::Type> get() const {
+  constexpr compute_arrays::Slice<typename C::Type> get() const {
     auto dataptr = (typename C::Type*)  mComponentCollections[index];
-    return Slice<typename C::Type>(dataptr+mOffset, mSize);
+    return compute_arrays::Slice<typename C::Type>(dataptr+mOffset, mSize);
   }
   // Same but for N->M, returns a pair of pointers. The first one points to an
   // array of <index, size> and the second points to the component data. The
