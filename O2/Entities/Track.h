@@ -4,7 +4,6 @@
 #include "../Components/Track.h"
 #include "../ecs/Entity.h"
 #include "../ecs/EntityCollection.h"
-#include <cmath>
 
 namespace ecs {
 template<typename Getter>

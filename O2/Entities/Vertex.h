@@ -3,7 +3,6 @@
 #include "functions/math.h"
 #include "../Components/Vertex.h"
 #include "../ecs/Entity.h"
-#include <cmath>
 
 namespace ecs {
 template <typename... Components> class Vertex : public Entity<Components...> {

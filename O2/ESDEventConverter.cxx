@@ -34,7 +34,7 @@ void ESDEventConverter::addESDEvent(double timestampNs,
   mVertexChiSquared.push_back(vertex->GetChi2());
   mVertexSigma.push_back(vertex->GetDispersion());
   int nIndices = vertex->GetNIndices();
-
+  // TODO: verify
   // How many tracks were already added before this event.
   size_t trackIndexOffset = mTrackX.size();
   //get and push the (offset) track indices of this vertex
