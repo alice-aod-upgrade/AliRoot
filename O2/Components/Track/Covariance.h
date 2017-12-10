@@ -4,10 +4,12 @@
 #include "../Macros/Definition.h"
 #include "../Datatypes/CovarianceMatrix.h"
 
+namespace o2{
 namespace ecs {
 namespace track {
-  using Cov_t = CovarianceMatrix<component_f,15>;
+  using Cov_t = o2::ecs::CovarianceMatrix<float,15>;
   DEFINE_COMPONENT(Covariance, Cov_t);
+}
 }
 }
 #endif

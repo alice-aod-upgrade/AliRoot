@@ -3,11 +3,12 @@
 
 #include "../../Macros/Definition.h"
 #include <cstdint>
-
+namespace o2{
 namespace ecs {
 namespace track {
 namespace mc {
-DEFINE_COMPONENT(MonteCarloIndex, component_i);
+DEFINE_COMPONENT(MonteCarloIndex, int32_t);
+}
 }
 }
 }

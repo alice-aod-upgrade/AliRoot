@@ -1,11 +1,13 @@
-#ifndef ALI_O2_COMPONENTS_VERTEX_SIGNAL_TO_NOISE_H
-#define ALI_O2_COMPONENTS_VERTEX_SIGNAL_TO_NOISE_H
+#ifndef ALI_O2_COMPONENTS_VERTEX_SIGNAL_TO_NOISE_X_H
+#define ALI_O2_COMPONENTS_VERTEX_SIGNAL_TO_NOISE_X_H
 #include "../Macros/Definition.h"
+namespace o2{
 namespace ecs {
 namespace vertex {
-DEFINE_COMPONENT(SignalToNoiseX, component_f);
-DEFINE_COMPONENT(SignalToNoiseY, component_f);
-DEFINE_COMPONENT(SignalToNoiseZ, component_f);
+DEFINE_COMPONENT(SignalToNoiseX,float);
+DEFINE_COMPONENT(SignalToNoiseY,float);
+DEFINE_COMPONENT(SignalToNoiseZ,float);
+}
 }
 }
 #endif

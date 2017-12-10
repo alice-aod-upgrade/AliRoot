@@ -1,6 +1,7 @@
 #ifndef ALI_O2_COMPONENENTS_VERTEX_ESD_EVENT_MAPPING_H
 #define ALI_O2_COMPONENENTS_VERTEX_ESD_EVENT_MAPPING_H
 #include "../Macros/Definition.h"
+namespace o2{
 namespace ecs {
 namespace vertex {
   class ESDEventMapping_t{
@@ -13,6 +14,7 @@ namespace vertex {
         : mTrackStart(TrackStart), mTrackCount(TrackCount) {}
   };
   DEFINE_COMPONENT(ESDEventMapping, ESDEventMapping_t);
+}
 }
 }
 #endif

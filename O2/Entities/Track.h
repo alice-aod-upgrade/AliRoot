@@ -5,6 +5,7 @@
 #include "../ecs/Entity.h"
 #include "../ecs/EntityCollection.h"
 
+namespace o2{
 namespace ecs {
 template<typename Getter>
 struct TrackFunctions : public Getter{
@@ -48,7 +49,7 @@ public:
   using TrackFunctions<EntityCollectionBase<Track<Components...>>>::TrackFunctions;
 };
 
-
+}
 }
 
 #endif

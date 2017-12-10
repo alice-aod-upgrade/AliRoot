@@ -7,6 +7,7 @@
 #include "extended_type_traits.h"
 #include <tuple>
 
+namespace o2{
 namespace ecs {
 
 /// An Entity is in essence a reference to an EntityCollection and an id.
@@ -97,5 +98,6 @@ public:
     return compute_arrays::Slice<typename G::Type>((typename G::Type*)(data.second + index), size);
   }
 };
+}
 }
 #endif

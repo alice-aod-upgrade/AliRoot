@@ -32,21 +32,22 @@ include_directories(${ROOT_INCLUDE_DIR}
 #file(GLOB SRCS "*.cxx")
 set(SRCS
   ESDEventConverter.cxx
-  O2AnalysisManager.cxx
+  AnalysisManager.cxx
 )
 
 # Headers, from sources
 string(REPLACE ".cxx" ".h" HDRS "${SRCS}")
 set(HDRS
   ${HDRS}
-  O2AnalysisTask.h
-  O2ESDAnalysisTask.h
+  Histogram.h
+  AnalysisTask.h
+  ESDAnalysisTask.h
 )
 
 # Generate the dictionary
 # It will create G_ARG1.cxx and G_ARG1.h / ARG1 = function first argument
-get_directory_property(incdirs INCLUDE_DIRECTORIES)
-generate_dictionary("O2" "${MODULE}LinkDef.h" "${HDRS}" "${incdirs}")
+#get_directory_property(incdirs INCLUDE_DIRECTORIES)
+#generate_dictionary("O2" "${MODULE}LinkDef.h" "${HDRS}" "${incdirs}")
 
 # TODO: set these
 set(ROOT_DEPENDENCIES Core EG Geom Gpad Graf3d MathCore Matrix Physics RIO Tree)
@@ -62,7 +63,7 @@ add_target_parfile(${MODULE} "${SRCS}" "${HDRS}" "${MODULE}LinkDef.h" "${LIBDEPS
 
 # Create an object to be reused in case of static libraries
 # Otherwise the sources will be compiled twice
-add_library(${MODULE}-object OBJECT ${SRCS} G__${MODULE}.cxx)
+add_library(${MODULE}-object OBJECT ${SRCS})
 
 # Add a library to the project using the object
 add_library(${MODULE} SHARED $<TARGET_OBJECTS:O2-object>)

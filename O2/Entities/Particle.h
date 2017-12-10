@@ -4,8 +4,8 @@
 #include "../Components/Particle.h"
 #include "../ecs/EntityCollection.h"
 #include "../ecs/Entity.h"
-#include <cmath>
 
+namespace o2{
 namespace ecs {
   template<typename Getter>
   struct ParticleFunctions : public Getter{
@@ -39,5 +39,5 @@ namespace ecs {
     using ParticleFunctions<EntityCollectionBase<Particle<Components...>>>::ParticleFunctions;
   };
 }
-
+}
 #endif

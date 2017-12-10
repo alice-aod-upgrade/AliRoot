@@ -2,12 +2,14 @@
 #define ALI_O2_COMPONENTS_GENERIC_MOMENTUM_H
 #include "../Macros/Definition.h"
 #include "../../ecs/Dependency.h"
+namespace o2{
 namespace ecs {
 namespace generic {
-DEFINE_COMPONENT(Px, component_f);
-DEFINE_COMPONENT(Py, component_f);
-DEFINE_COMPONENT(Pz, component_f);
-class Pt : public Dependency<Px, Py> {};
+DEFINE_COMPONENT(Px, float);
+DEFINE_COMPONENT(Py, float);
+DEFINE_COMPONENT(Pz, float);
+class Pt : public o2::ecs::Dependency<Px, Py> {};
+}
 }
 }
 #endif

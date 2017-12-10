@@ -18,14 +18,4 @@
 #pragma link off all classes;
 #pragma link off all functions;
 
-// We use a custom streamer to allow for custom compression layers
-#pragma link C++ class O2Timeframe - ;
-
-#pragma link C++ class AliO2AnalysisManager;
-#pragma link C++ class AliO2InputHandler;
-#pragma link C++ class AliO2Event;
-#pragma link C++ class AliO2Track;
-#pragma link C++ class AliO2GlobalTrack;
-#pragma link C++ class AliO2ITSTrack;
-#pragma link C++ class AliO2Vertex;
 #endif

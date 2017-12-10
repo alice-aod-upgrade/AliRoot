@@ -8,6 +8,7 @@
 
 class AliESDEvent;
 class AliMCEvent;
+namespace o2{
 class ESDEventConverter {
   bool mContainsMcInfo = false;
   unsigned mEventCounter = 0;
@@ -69,4 +70,5 @@ public:
   /// to fit the data in a contigous buffer.
   void toFile(const std::string &filename);
 };
+}
 #endif

@@ -1,11 +1,6 @@
-#ifndef ALI_O2_COMPONENTS_MACROS_DEFINE_H
-#define ALI_O2_COMPONENTS_MACROS_DEFINE_H
-#include "../../ecs/VariableComponent.h"
+#pragma once
 #include <cstdint>
-
-using component_f = float;
-using component_i = int32_t;
-
+#include "../../ecs/VariableComponent.h"
 #define DEFINE_COMPONENT(NAME, TYPE)                                           \
   class NAME {                                                                 \
     TYPE m##NAME;                                                              \
@@ -25,7 +20,7 @@ using component_i = int32_t;
   }
 
 #define DEFINE_ONE_TO_MANY_COMPONENT(NAME, TYPE)                               \
-  class NAME : IVariableComponent {                                            \
+  class NAME : o2::ecs::IVariableComponent {                                            \
     TYPE m##NAME;                                                              \
                                                                                \
   public:                                                                      \
@@ -41,5 +36,3 @@ using component_i = int32_t;
     static const char *Id() { return #NAME; }                                  \
     using Type = TYPE;\
   }
-
-#endif

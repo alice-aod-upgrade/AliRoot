@@ -3,7 +3,7 @@
 #include "functions/math.h"
 #include "../Components/Vertex.h"
 #include "../ecs/Entity.h"
-
+namespace o2{
 namespace ecs {
 template <typename... Components> class Vertex : public Entity<Components...> {
 public:
@@ -20,5 +20,5 @@ public:
   }
 };
 }
-
+}
 #endif

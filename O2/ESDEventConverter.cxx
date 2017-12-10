@@ -4,18 +4,20 @@
 #include <AliMCParticle.h>
 #include <TRandom2.h>
 
-using namespace ecs;
-
+using namespace o2;
+using namespace o2::ecs;
 void ESDEventConverter::addESDEvent(double timestampNs,
                                     const AliESDEvent *event,
                                     const AliMCEvent *mcEvent) {
   TRandom2 rng;
   int numberOfTracks = event->GetNumberOfTracks();
-  if (0 == numberOfTracks) {
+  if (0 >= numberOfTracks) {
     return;
   }
-  if (mContainsMcInfo && (nullptr == mcEvent)) {
-    return;
+  if (mContainsMcInfo) {
+    if(!mcEvent || mcEvent->GetNumberOfTracks() <= 0){
+      return;
+    }
   }
   const AliESDVertex *vertex = event->GetVertex();
   mVertexX.push_back(vertex->GetX());
@@ -49,7 +51,7 @@ void ESDEventConverter::addESDEvent(double timestampNs,
   mVertexUsedTracksIndicesOffset += nIndices;
 
   //push the mapping of (primary-)vertex -> tracks. [offset,size] pair.
-  mVertexESDEventMapping.push_back(vertex::ESDEventMapping_t(mTrackX.size(), numberOfTracks))
+  mVertexESDEventMapping.push_back(vertex::ESDEventMapping_t(mTrackX.size(), numberOfTracks));
 
   for (int i = 0; i < numberOfTracks; i++) {
     AliESDtrack *esdTrack = event->GetTrack(i);

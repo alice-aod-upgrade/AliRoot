@@ -3,6 +3,7 @@
 #include <tuple>
 #include <type_traits>
 
+namespace o2{
 // Template to check if a type is one of the members of a parameter pack
 template <typename...> struct is_one_of {
   static constexpr bool value = false;
@@ -81,5 +82,5 @@ template <bool... b> struct any_true {
   }
   static constexpr bool value = any_true<b...>::check();
 };
-
+}
 #endif

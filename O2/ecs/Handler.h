@@ -10,6 +10,7 @@
 #include <map>
 #include <unistd.h>
 
+namespace o2{
 namespace ecs {
 /// Handles the fetching and sharing of data. This is the class which actually
 /// owns all the allocated data and open files.
@@ -228,5 +229,6 @@ public:
     }
   }
 };
+}
 }
 #endif

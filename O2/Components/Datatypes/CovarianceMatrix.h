@@ -1,6 +1,8 @@
 #ifndef ALI_O2_COMPONENTS_DATATYPES_COVARIANCE_MATRIX_H
 #define ALI_O2_COMPONENTS_DATATYPES_COVARIANCE_MATRIX_H
 
+namespace o2{
+namespace ecs{
 template<typename T, unsigned N>
 struct CovarianceMatrix {
   T mCovariance[N];
@@ -22,5 +24,6 @@ public:
     }
   }
 };
-
+}
+}
 #endif

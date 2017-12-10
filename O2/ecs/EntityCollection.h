@@ -8,6 +8,7 @@
 #include <iostream>
 #include <stddef.h>
 #include <tuple>
+namespace o2{
 namespace ecs {
 /// EntityCollectionInner is an EntityCollection which deals only in pure
 /// Entity<...> objects. Because these will be used as basetypes for the user
@@ -140,5 +141,5 @@ template<typename Entity>
    using EntityCollectionBase<Entity>::EntityCollectionBase;
  };
 }
-
+}
 #endif
